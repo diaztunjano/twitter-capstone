@@ -1,11 +1,12 @@
-import numpy as np  # linear algebra
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import pandas as pd
 import json
 import csv
 
+from operator import itemgetter
 
-def read():
-    print("Reading File")
+
+def read_json():
+    print("Procesando informacion. Paciencia :) ")
     # Opening JSON file
     f = open('data.json')
 
@@ -20,13 +21,14 @@ def read():
 
 
 def make_json():
+    print('Lectura inicial de datos. Puede que tarde un poco.')
     # Function to convert a CSV to JSON
     # Takes the file paths as arguments
     csvFilePath = r'data.csv'
     jsonFilePath = r'data.json'
 
     # create a dictionary
-    data = {}
+    data = []
 
     # Open a csv reader called DictReader
     with open(csvFilePath, encoding='utf-8') as csvf:
@@ -39,7 +41,16 @@ def make_json():
             # Assuming a column named 'No' to
             # be the primary key
             # key = rows['user_name']
-            data[key] = rows
+
+            number_followers = int(rows["user_followers"])
+            number_friends = int(rows["user_friends"])
+            number_favourites = int(rows["user_favourites"])
+
+            rows["user_followers"] = number_followers
+            rows["user_friends"] = number_friends
+            rows["user_favourites"] = number_favourites
+
+            data.append(rows)
             key += 1
 
     # Open a json writer, and use the json.dumps()
@@ -50,7 +61,7 @@ def make_json():
 
 def handle_user_input(input):
 
-    data = read()
+    data = read_json()
 
     if input == 1:
         most_followers(data)
@@ -61,12 +72,13 @@ def handle_user_input(input):
     if input == 3:
         most_favorites(data)
 
+
 def most_followers(data):
     print("\n El top 10 de tweets con mas retweet es:")
-    i = 0
-    while i < 4:
-        print(data[str(i)])
-        i += 1
+
+    user = max(data, key=itemgetter('user_followers'))
+
+    print(f'1. {user}')
 
 
 def most_friends(data):
