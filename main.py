@@ -1,11 +1,12 @@
-import numpy as np  # linear algebra
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import pandas as pd
 import json
 import csv
 
+from operator import itemgetter
 
-def read():
-    print("Reading File")
+
+def read_json():
+    print("Procesando informacion. Paciencia :) ")
     # Opening JSON file
     f = open('data.json')
 
@@ -20,13 +21,14 @@ def read():
 
 
 def make_json():
+    print('Lectura inicial de datos. Puede que tarde un poco.')
     # Function to convert a CSV to JSON
     # Takes the file paths as arguments
     csvFilePath = r'data.csv'
     jsonFilePath = r'data.json'
 
     # create a dictionary
-    data = {}
+    data = []
 
     # Open a csv reader called DictReader
     with open(csvFilePath, encoding='utf-8') as csvf:
@@ -39,7 +41,16 @@ def make_json():
             # Assuming a column named 'No' to
             # be the primary key
             # key = rows['user_name']
-            data[key] = rows
+
+            number_followers = int(rows["user_followers"])
+            number_friends = int(rows["user_friends"])
+            number_favourites = int(rows["user_favourites"])
+
+            rows["user_followers"] = number_followers
+            rows["user_friends"] = number_friends
+            rows["user_favourites"] = number_favourites
+
+            data.append(rows)
             key += 1
 
     # Open a json writer, and use the json.dumps()
@@ -50,48 +61,47 @@ def make_json():
 
 def handle_user_input(input):
 
-    data = read()
+    data = read_json()
 
     if input == 1:
-        most_retweeted(data)
+        most_followers(data)
 
     if input == 2:
-        users(data)
+        most_friends(data)
 
     if input == 3:
-        days(data)
-
-    if input == 4:
-        hashtags(data)
+        most_favorites(data)
 
 
-def most_retweeted(data):
-    print("\n El top 10 de tweets con mas retweet es:")
-    i = 0
-    while i < 4:
-        print(data[str(i)])
-        i += 1
+def most_followers(data):
+    print("\n El top 10 de tweets con mas followers es:")
+
+    users = sorted(data, key=itemgetter('user_followers'), reverse=True)[:10]
+    counter = 1
+    for user in users:
+        name = user['user_name']
+        number = user['user_followers']
+        tweet = user['text']
+
+        print(f'{counter}. USER: {name} \n  TWEET: {tweet} \n  TOTAL FOLLOWERS: {number}')
+        print('________')
+        counter += 1
 
 
-def users(data):
+def most_friends(data):
     print("\n El top 10 de usuarios con mas tweets es:")
 
 
-def days(data):
+def most_favorites(data):
     print("\n El top 10 de dias con mas tweets:")
-
-
-def hashtags(data):
-    print("\n El top 10 de hashtags mas usados:")
 
 
 def main_menu():
     print("-----------------------------------------")
-    print("Hola! ¿Que quieres saber? (1,2,3,4)")
-    print("1. Top 10 tweets con mas retweet.")
-    print("2. Top 10 usuarios en función a la cantidad de tweets que emitieron.")
-    print("3. Top 10 días donde hay más tweets.")
-    print("4. Top 10 hashtags más usados.")
+    print("Hola! ¿Que quieres saber? (1,2,3)")
+    print("1. Top 10 de tweets con mas followers.")
+    print("2. Top 10 users con mas amigos.")
+    print("3. Top 10 users con mas cantidad de cuentas favoritas.")
     print("-----------------------------------------")
 
 
