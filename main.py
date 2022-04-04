@@ -21,13 +21,43 @@ def read():
     # Closing file
     f.close()
 
-def run():
+def handle_user_input(input):
+
+    if input == 1:
+        most_retweeted()
+    
+    if input == 2:
+        users()
+    
+    if input == 3:
+        days()
+    
+    if input == 4:
+        hashtags()
+
+def most_retweeted():
+    print("\n El top 10 de tweets con mas retweet es:")
+    
+def users():
+    print("\n El top 10 de usuarios con mas tweets es:")
+
+def days():
+    print("\n El top 10 de dias con mas tweets:")
+    
+def hashtags():
+    print("\n El top 10 de hashtags mas usados:")
+
+def main_menu():
     print("Hola! ¿Que quieres saber? (1,2,3,4)")
     print("1. Top 10 tweets con mas retweet.")
     print("2. Top 10 usuarios en función a la cantidad de tweets que emitieron.")
     print("3. Top 10 días donde hay más tweets.")
     print("4. Top 10 hashtags más usados.")
 
+def run():
+    main_menu()
+    user_input = int(input())
+    handle_user_input(user_input)
 
 def main():
     run()
