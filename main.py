@@ -91,7 +91,7 @@ def most_followers(data):
 
 
 def most_friends(data):
-    print("\n El Top 10 de tweets cuyos users tienen mas amigos:")
+    print("\n El Top 10 de tweets cuyos users tienen mas amigos: ")
     users = sorted(data, key=itemgetter('user_friends'), reverse=True)[:10]
     counter = 1
     for user in users:
