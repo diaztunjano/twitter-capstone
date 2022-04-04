@@ -61,16 +61,17 @@ def make_json():
 
 def handle_user_input(input):
 
-    data = read_json()
-
     if input == 1:
+        data = read_json()
         most_followers(data)
 
     if input == 2:
+        data = read_json()
         most_friends(data)
 
     if input == 3:
-        most_favorites(data)
+        print("Por implementar.")
+        # most_favorites(data)
 
 
 def most_followers(data):
@@ -83,13 +84,24 @@ def most_followers(data):
         number = user['user_followers']
         tweet = user['text']
 
-        print(f'{counter}. USER: {name} \n  TWEET: {tweet} \n  TOTAL FOLLOWERS: {number}')
+        print(
+            f'{counter}. USER: {name} \n  TWEET: {tweet} \n  TOTAL FOLLOWERS: {number}')
         print('________')
         counter += 1
 
 
 def most_friends(data):
-    print("\n El top 10 de usuarios con mas tweets es:")
+    print("\n El Top 10 de tweets cuyos users tienen mas amigos: ")
+    users = sorted(data, key=itemgetter('user_friends'), reverse=True)[:10]
+    counter = 1
+    for user in users:
+        name = user['user_name']
+        number = user['user_friends']
+        tweet = user['text']
+
+        print(f'{counter}. USER: {name} \n  TWEET: {tweet} \n  TOTAL AMIGOS: {number}')
+        print('________')
+        counter += 1
 
 
 def most_favorites(data):
@@ -100,7 +112,7 @@ def main_menu():
     print("-----------------------------------------")
     print("Hola! ¿Que quieres saber? (1,2,3)")
     print("1. Top 10 de tweets con mas followers.")
-    print("2. Top 10 users con mas amigos.")
+    print("2. Top 10 de tweets cuyos users tienen mas amigos.")
     print("3. Top 10 users con mas cantidad de cuentas favoritas.")
     print("-----------------------------------------")
 
