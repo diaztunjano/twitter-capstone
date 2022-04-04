@@ -74,11 +74,18 @@ def handle_user_input(input):
 
 
 def most_followers(data):
-    print("\n El top 10 de tweets con mas retweet es:")
+    print("\n El top 10 de tweets con mas followers es:")
 
-    user = max(data, key=itemgetter('user_followers'))
+    users = sorted(data, key=itemgetter('user_followers'), reverse=True)[:10]
+    counter = 1
+    for user in users:
+        name = user['user_name']
+        number = user['user_followers']
+        tweet = user['text']
 
-    print(f'1. {user}')
+        print(f'{counter}. USER: {name} \n  TWEET: {tweet} \n  TOTAL FOLLOWERS: {number}')
+        print('________')
+        counter += 1
 
 
 def most_friends(data):
