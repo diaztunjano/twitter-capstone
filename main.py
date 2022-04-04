@@ -53,19 +53,15 @@ def handle_user_input(input):
     data = read()
 
     if input == 1:
-        most_retweeted(data)
+        most_followers(data)
 
     if input == 2:
-        users(data)
+        most_friends(data)
 
     if input == 3:
-        days(data)
+        most_favorites(data)
 
-    if input == 4:
-        hashtags(data)
-
-
-def most_retweeted(data):
+def most_followers(data):
     print("\n El top 10 de tweets con mas retweet es:")
     i = 0
     while i < 4:
@@ -73,25 +69,20 @@ def most_retweeted(data):
         i += 1
 
 
-def users(data):
+def most_friends(data):
     print("\n El top 10 de usuarios con mas tweets es:")
 
 
-def days(data):
+def most_favorites(data):
     print("\n El top 10 de dias con mas tweets:")
-
-
-def hashtags(data):
-    print("\n El top 10 de hashtags mas usados:")
 
 
 def main_menu():
     print("-----------------------------------------")
-    print("Hola! ¿Que quieres saber? (1,2,3,4)")
-    print("1. Top 10 tweets con mas retweet.")
-    print("2. Top 10 usuarios en función a la cantidad de tweets que emitieron.")
-    print("3. Top 10 días donde hay más tweets.")
-    print("4. Top 10 hashtags más usados.")
+    print("Hola! ¿Que quieres saber? (1,2,3)")
+    print("1. Top 10 users con mas followers.")
+    print("2. Top 10 users con mas amigos.")
+    print("3. Top 10 users con mas cantidad de cuentas favoritas.")
     print("-----------------------------------------")
 
 
