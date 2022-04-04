@@ -89,7 +89,7 @@ def most_followers(data):
 
 
 def most_friends(data):
-    print("\n El top 10 de usuarios con mas tweets es:")
+    print("\n El Top 10 de tweets cuyos users tienen mas amigos:")
 
 
 def most_favorites(data):
@@ -100,7 +100,7 @@ def main_menu():
     print("-----------------------------------------")
     print("Hola! ¿Que quieres saber? (1,2,3)")
     print("1. Top 10 de tweets con mas followers.")
-    print("2. Top 10 users con mas amigos.")
+    print("2. Top 10 de tweets cuyos users tienen mas amigos.")
     print("3. Top 10 users con mas cantidad de cuentas favoritas.")
     print("-----------------------------------------")
 
